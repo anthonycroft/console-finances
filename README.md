@@ -17,7 +17,7 @@ https://github.com/anthonycroft/console-finances
 
 ## Screenshot:
 
-![Console Finances Home Page](https://github.com/anthonycroft/bootstrap-portfolio/blob/main/assets/images/console-finances-app.png)
+![Console Finances Home Page](https://github.com/anthonycroft/console-finances/blob/main/assets/images/console-finances-app.png)
 
 
 ## Installation
