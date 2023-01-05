@@ -86,3 +86,46 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+// Initialise accumulator for total profits
+let profits = 0;
+let avgVariance =0;
+let variances = 0;
+let greatestIncrease = 0;
+let greatestIncreaseMth = "";
+let greatestDecreaseMth = "";
+let greatestDecrease = 0;
+let thisVariance = 0;
+
+// Iterate over the array to get totals
+for (var i = 0; i < finances.length; i++) { 
+  // add to total amount
+  profits = profits + finances[i][1];
+
+  // get monthly changes (variances)
+  if ( i > 0 ) {
+    thisVariance = finances[i][1] - finances[i-1][1];
+    console.log(`${finances[i][0]}: ${thisVariance}`);
+    variances = variances + thisVariance;
+
+    if (thisVariance > greatestIncrease) {
+      greatestIncrease = thisVariance;
+      greatestIncreaseMth = finances[i][0];
+    } else if (thisVariance < greatestDecrease) {
+      greatestDecrease = thisVariance;
+      greatestDecreaseMth = finances[i][0];
+    }
+  }
+}
+
+// calculate average variance
+console.log(`Finances.length ${finances.length}`);
+console.log(`variances ${variances}`);
+
+avgVariance = variances / (finances.length -1);
+
+console.log(`Total Months: ${finances.length}`);
+console.log(`Total: ${profits}`);
+console.log(`Average Change: ${avgVariance}`);
+console.log(`Greatest Increase in Profits: ${greatestIncreaseMth} ${greatestIncrease}`);
+console.log(`Greatest Decrease in Profits: ${greatestDecreaseMth} ${greatestDecrease}`);
