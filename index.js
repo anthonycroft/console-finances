@@ -102,13 +102,16 @@ for (var i = 0; i < finances.length; i++) {
   // add to total amount
   profits = profits + finances[i][1];
 
-  // get monthly changes 
+  // get monthly changes starting at month 2
   if ( i > 0 ) {
+
+    // calculate current variance
     thisVariance = finances[i][1] - finances[i-1][1];
 
-    
+    // add to running total
     variances = variances + thisVariance;
 
+    // if biggest increase/decrease so far then update assoicated variable
     if (thisVariance > greatestIncrease) {
       greatestIncrease = thisVariance;
       greatestIncreaseMth = finances[i][0];
@@ -122,9 +125,16 @@ for (var i = 0; i < finances.length; i++) {
 // calculate average variance
 avgVariance = variances / (finances.length -1);
 
-console.log(`Total Months: ${finances.length}`);
-console.log(`Total: $${new Intl.NumberFormat('en-US').format(profits)}`);
-console.log(`Average Change: $${new Intl.NumberFormat('en-US').format(avgVariance.toFixed(2))}`);
-console.log(`Greatest Increase in Profits: ${greatestIncreaseMth} $${new Intl.NumberFormat('en-US').format(greatestIncrease)}`);
-console.log(`Greatest Decrease in Profits: ${greatestDecreaseMth} $${new Intl.NumberFormat('en-US').format(greatestDecrease)}`);
+// output final report
+
+console.log("Financial Analysis");
+console.log("-".repeat(28));
+console.log(`Total Months: ${finances.length}`);  // months 
+console.log(`Total: $${new Intl.NumberFormat('en-US').format(profits)}`);  // total profits
+console.log(`Average Change: $${new Intl.NumberFormat('en-US').format(avgVariance.toFixed(2))}`);  // average change over period
+
+// greatest monthly increase in profits over period
+console.log(`Greatest Increase in Profits: ${greatestIncreaseMth} ($${new Intl.NumberFormat('en-US').format(greatestIncrease)})`);
+// greatest monthly decrease in profits over period
+console.log(`Greatest Decrease in Profits: ${greatestDecreaseMth} ($${new Intl.NumberFormat('en-US').format(greatestDecrease)})`);
 
