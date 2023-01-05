@@ -1,5 +1,5 @@
 # Console-Finances
-Bootstrap based portfolio site
+Financial anlysis in the console using JavaScript.
 
 ## Description
 
