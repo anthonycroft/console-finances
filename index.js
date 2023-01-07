@@ -105,24 +105,21 @@ for (var i = 0; i < finances.length; i++) {
   if ( i > 0 ) {
     // calculate current change if mth > 1
     thisVariance = finances[i][1] - finances[i-1][1];
-  } else {
-    // calculate current change if mth = 1
-    thisVariance = finances[i][1];
-  }
+  
+    // add to running total
+    variances = variances + thisVariance;
 
-  // add to running total
-  variances = variances + thisVariance;
-
-  // if biggest increase/decrease so far then update assoicated variable
-  if (thisVariance > greatest[1]) {
-    greatest = [finances[i][0],thisVariance];
-  } else if (thisVariance < smallest[1]) {
-    smallest = [finances[i][0],thisVariance];
+    // if biggest increase/decrease so far then update assoicated variable
+    if (thisVariance > greatest[1]) {
+      greatest = [finances[i][0],thisVariance];
+    } else if (thisVariance < smallest[1]) {
+      smallest = [finances[i][0],thisVariance];
+    }
   }
 }
 
 //calculate average variance
-avgVariance = variances / (finances.length);
+avgVariance = variances / (finances.length -1);
 
 //output final report
 console.log("Financial Analysis");
