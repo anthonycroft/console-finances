@@ -91,42 +91,41 @@ var finances = [
 let profits = 0;
 let avgVariance =0;
 let variances = 0;
-let greatestIncrease = 0;
-let greatestIncreaseMth = "";
-let greatestDecreaseMth = "";
-let greatestDecrease = 0;
+let greatest = ['',0];
+let smallest = ['',0];
 let thisVariance = 0;
 
 // Iterate over the array to get totals
 for (var i = 0; i < finances.length; i++) { 
-  // add to total amount
+  
+  // accumulate profits
   profits = profits + finances[i][1];
 
-  // get monthly changes starting at month 2
+  // get monthly changes
   if ( i > 0 ) {
-
-    // calculate current variance
+    // calculate current change if mth > 1
     thisVariance = finances[i][1] - finances[i-1][1];
-
-    // add to running total
-    variances = variances + thisVariance;
-
-    // if biggest increase/decrease so far then update assoicated variable
-    if (thisVariance > greatestIncrease) {
-      greatestIncrease = thisVariance;
-      greatestIncreaseMth = finances[i][0];
-    } else if (thisVariance < greatestDecrease) {
-      greatestDecrease = thisVariance;
-      greatestDecreaseMth = finances[i][0];
-    }
+  } else {
+    // calculate current change if mth = 1
+    thisVariance = finances[i][1];
   }
+
+  // add to running total
+  variances = variances + thisVariance;
+
+  // if biggest increase/decrease so far then update assoicated variable
+  if (thisVariance > greatest[1]) {
+    greatest = finances[i];
+  } else if (thisVariance < smallest[1]) {
+    smallest = finances[i];
+  }
+  
 }
 
-// calculate average variance
-avgVariance = variances / (finances.length -1);
+//calculate average variance
+avgVariance = variances / (finances.length);
 
-// output final report
-
+//output final report
 console.log("Financial Analysis");
 console.log("-".repeat(28));
 console.log(`Total Months: ${finances.length}`);  // months 
@@ -134,7 +133,6 @@ console.log(`Total: $${new Intl.NumberFormat('en-US').format(profits)}`);  // to
 console.log(`Average Change: $${new Intl.NumberFormat('en-US').format(avgVariance.toFixed(2))}`);  // average change over period
 
 // greatest monthly increase in profits over period
-console.log(`Greatest Increase in Profits: ${greatestIncreaseMth} ($${new Intl.NumberFormat('en-US').format(greatestIncrease)})`);
+console.log(`Greatest Increase in Profits: ${greatest[0]} ($${new Intl.NumberFormat('en-US').format(greatest[1])})`);
 // greatest monthly decrease in profits over period
-console.log(`Greatest Decrease in Profits: ${greatestDecreaseMth} ($${new Intl.NumberFormat('en-US').format(greatestDecrease)})`);
-
+console.log(`Greatest Decrease in Profits: ${smallest[0]} ($${new Intl.NumberFormat('en-US').format(smallest[1])})`);
