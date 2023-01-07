@@ -104,17 +104,17 @@ for (var i = 0; i < finances.length; i++) {
   // get monthly changes
   if ( i > 0 ) {
     // calculate current change if mth > 1
-    thisVariance = parseInt(finances[i][1]) - parseInt(finances[i-1][1]);
+    thisVariance = finances[i][1] - finances[i-1][1];
   } else {
     // calculate current change if mth = 1
-    thisVariance = parseInt(finances[i][1]);
+    thisVariance = finances[i][1];
   }
 
   // add to running total
   variances = variances + thisVariance;
 
   // if biggest increase/decrease so far then update assoicated variable
-  if (thisVariance > parseInt(greatest[1])) {
+  if (thisVariance > greatest[1]) {
     greatest = [finances[i][0],thisVariance];
   } else if (thisVariance < smallest[1]) {
     smallest = [finances[i][0],thisVariance];
